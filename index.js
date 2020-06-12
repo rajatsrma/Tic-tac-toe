@@ -9,6 +9,7 @@ changePlayer(turn);
 //Show current player
 function changePlayer(turn) {
   document.getElementById("player").textContent = turn ? "X" : "O";
+  checkResult(!turn);
 }
 
 //filling boxes on click
@@ -19,7 +20,7 @@ document.getElementById("one").addEventListener("click", function () {
     if (turn) document.getElementById("one").textContent = "X";
     else document.getElementById("one").textContent = "O";
     document.getElementById("one").style.color = "black";
-    checkResult(turn);
+    // checkResult(turn);
     turn = !turn;
     changePlayer(turn);
   }
@@ -31,7 +32,7 @@ document.getElementById("two").addEventListener("click", function () {
     if (turn) document.getElementById("two").textContent = "X";
     else document.getElementById("two").textContent = "O";
     document.getElementById("two").style.color = "black";
-    checkResult(turn);
+    // checkResult(turn);
     turn = !turn;
     changePlayer(turn);
   }
@@ -43,7 +44,7 @@ document.getElementById("three").addEventListener("click", function () {
     if (turn) document.getElementById("three").textContent = "X";
     else document.getElementById("three").textContent = "O";
     document.getElementById("three").style.color = "black";
-    checkResult(turn);
+    // checkResult(turn);
     turn = !turn;
     changePlayer(turn);
   }
@@ -55,7 +56,7 @@ document.getElementById("four").addEventListener("click", function () {
     if (turn) document.getElementById("four").textContent = "X";
     else document.getElementById("four").textContent = "O";
     document.getElementById("four").style.color = "black";
-    checkResult(turn);
+    // checkResult(turn);
     turn = !turn;
     changePlayer(turn);
   }
@@ -67,7 +68,7 @@ document.getElementById("five").addEventListener("click", function () {
     if (turn) document.getElementById("five").textContent = "X";
     else document.getElementById("five").textContent = "O";
     document.getElementById("five").style.color = "black";
-    checkResult(turn);
+    // checkResult(turn);
     turn = !turn;
     changePlayer(turn);
   }
@@ -79,7 +80,7 @@ document.getElementById("six").addEventListener("click", function () {
     if (turn) document.getElementById("six").textContent = "X";
     else document.getElementById("six").textContent = "O";
     document.getElementById("six").style.color = "black";
-    checkResult(turn);
+    // checkResult(turn);
     turn = !turn;
     changePlayer(turn);
   }
@@ -91,7 +92,7 @@ document.getElementById("seven").addEventListener("click", function () {
     if (turn) document.getElementById("seven").textContent = "X";
     else document.getElementById("seven").textContent = "O";
     document.getElementById("seven").style.color = "black";
-    checkResult(turn);
+    // checkResult(turn);
     turn = !turn;
     changePlayer(turn);
   }
@@ -103,7 +104,7 @@ document.getElementById("eight").addEventListener("click", function () {
     if (turn) document.getElementById("eight").textContent = "X";
     else document.getElementById("eight").textContent = "O";
     document.getElementById("eight").style.color = "black";
-    checkResult(turn);
+    // checkResult(turn);
     turn = !turn;
     changePlayer(turn);
   }
@@ -115,7 +116,7 @@ document.getElementById("nine").addEventListener("click", function () {
     if (turn) document.getElementById("nine").textContent = "X";
     else document.getElementById("nine").textContent = "O";
     document.getElementById("nine").style.color = "black";
-    checkResult(turn);
+    // checkResult(turn);
     turn = !turn;
     changePlayer(turn);
   }
@@ -133,33 +134,42 @@ function checkResult(turn) {
   var h = document.getElementById("eight").textContent;
   var i = document.getElementById("nine").textContent;
 
-  //horizontal check
+  //winning combo check
 
   if (
     (a == b && b == c && a !== "-") ||
     (d == e && e == f && e !== "-") ||
-    (g == h && h == i && i !== "-")
-  ) {
-    if (turn) alert("player X won the game");
-    else alert("player O won the game");
-    location.reload();
-  }
-
-  // vertical check
-  if (
+    (g == h && h == i && i !== "-") ||
     (a == d && d == g && a !== "-") ||
     (b == e && e == h && e !== "-") ||
-    (c == f && f == i && i !== "-")
+    (c == f && f == i && i !== "-") ||
+    (a == e && e == i && i !== "-") ||
+    (c == e && c == g && e !== "-")
   ) {
-    if (turn) alert("player X won the game");
-    else alert("player O won the game");
-    location.reload();
+    document.getElementById("result").textContent = turn
+      ? "player X won the game"
+      : "player O won the game";
+    document.getElementById("restart").removeAttribute("disabled");
   }
 
-  // diagonal check
-  if ((a == e && e == i && i !== "-") || (c == e && c == g && e !== "-")) {
-    if (turn) alert("player X won the game");
-    else alert("player O won the game");
-    location.reload();
+  // Game draw
+  if (
+    a !== "-" &&
+    b !== "-" &&
+    c !== "-" &&
+    d !== "-" &&
+    e !== "-" &&
+    f !== "-" &&
+    g !== "-" &&
+    h !== "-" &&
+    i !== "-"
+  ) {
+    document.getElementById("result").textContent = "Game draw";
+    document.getElementById("restart").removeAttribute("disabled");
   }
 }
+
+// Restart button functionality
+document.getElementById("restart").addEventListener("click", function () {
+  location.reload();
+});
