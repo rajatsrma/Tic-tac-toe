@@ -150,6 +150,7 @@ function checkResult(turn) {
       ? "player X won the game"
       : "player O won the game";
     document.getElementById("restart").removeAttribute("disabled");
+    document.getElementById("continueGame").removeAttribute("disabled");
   }
 
   // Game draw
@@ -166,10 +167,34 @@ function checkResult(turn) {
   ) {
     document.getElementById("result").textContent = "Game draw";
     document.getElementById("restart").removeAttribute("disabled");
+    document.getElementById("continueGame").removeAttribute("disabled");
   }
 }
 
 // Restart button functionality
 document.getElementById("restart").addEventListener("click", function () {
   location.reload();
+});
+
+// continue game functionality
+document.getElementById("continueGame").addEventListener("click", function () {
+  document.getElementById("one").textContent = "-";
+  document.getElementById("two").textContent = "-";
+  document.getElementById("three").textContent = "-";
+  document.getElementById("four").textContent = "-";
+  document.getElementById("five").textContent = "-";
+  document.getElementById("six").textContent = "-";
+  document.getElementById("seven").textContent = "-";
+  document.getElementById("eight").textContent = "-";
+  document.getElementById("nine").textContent = "-";
+
+  document.getElementById("one").style.color = "white";
+  document.getElementById("two").style.color = "white";
+  document.getElementById("three").style.color = "white";
+  document.getElementById("four").style.color = "white";
+  document.getElementById("five").style.color = "white";
+  document.getElementById("six").style.color = "white";
+  document.getElementById("seven").style.color = "white";
+  document.getElementById("eight").style.color = "white";
+  document.getElementById("nine").style.color = "white";
 });
