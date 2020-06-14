@@ -13,36 +13,69 @@
     <title>Tic-Tac-Toe</title>
   </head>
   <body>
-    <h1>Tic-Tac-Toe</h1>
-    <div class="container">
-      <table class="table table-bordered">
-        <tbody>
-          <tr>
-            <td id="one">-</td>
-            <td id="two">-</td>
-            <td id="three">-</td>
-          </tr>
-          <tr>
-            <td id="four">-</td>
-            <td id="five">-</td>
-            <td id="six">-</td>
-          </tr>
-          <tr>
-            <td id="seven">-</td>
-            <td id="eight">-</td>
-            <td id="nine">-</td>
-          </tr>
-        </tbody>
-      </table>
-      <h2>Player: <span id="player"></span></h2>
-      <div id="result"></div>
-      <button id="restart" class="btn btn-primary" disabled>
-        Start a new game
-      </button>
-      <button id="continueGame" class="btn btn-danger" disabled>
-        Continue game
-      </button>
+    <div class="row">
+      <!-- khaaliii column -->
+      <div class="col md 1"></div>
+      <!-- main game board -->
+      <div class="col md 5">
+        <h1>Tic-Tac-Toe</h1>
+        <!-- main table -->
+        <table class="table table-bordered" id="ability">
+          <tbody>
+            <tr>
+              <td id="one">-</td>
+              <td id="two">-</td>
+              <td id="three">-</td>
+            </tr>
+            <tr>
+              <td id="four">-</td>
+              <td id="five">-</td>
+              <td id="six">-</td>
+            </tr>
+            <tr>
+              <td id="seven">-</td>
+              <td id="eight">-</td>
+              <td id="nine">-</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <!-- results column -->
+      <div class="col md 4">
+        <h1>Win count</h1>
+        <!-- Win count table -->
+        <table class="table table-bordered">
+          <tbody>
+            <tr>
+              <th>X</th>
+              <th>O</th>
+            </tr>
+            <tr>
+              <th id="winX">0</th>
+              <th id="winO">0</th>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Current player -->
+        <h2>Current player: <span id="currentPlayer">X</span></h2>
+
+        <div class="row">
+          <div class="col md 6">
+            <button id="freshGame" class="btn btn-primary" disabled>
+              Fresh start
+            </button>
+          </div>
+          <div class="col md 6">
+            <button id="continueGame" class="btn btn-danger" disabled>
+              Carry on
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="col md 2"></div>
     </div>
+    <!-- script file -->
     <script src="index.js"></script>
     <script
       src="https://code.jquery.com/jquery-3.4.1.slim.min.js"

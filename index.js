@@ -1,200 +1,115 @@
-// Player Signs
-// var playerSign1 = "X";
-// var playerSign2 = "0";
+// Win counts
+var winX = 0;
+var winO = 0;
+
+// show these counts in the win count table
+
+// var to keep track of win condition
+var win = 0;
 
 //bool to keep track on player turns
 // turn = 0 for "0" and turn = 1 for "X"
 var turn = 1; //1st player
-changePlayer(turn);
-//Show current player
-function changePlayer(turn) {
-  document.getElementById("player").textContent = turn ? "X" : "O";
-  checkResult(!turn);
+
+// No. of times clicked on the board
+var timesClicked = 0;
+
+// Show current player
+function changePlayer() {
+  document.getElementById("currentPlayer").textContent = turn ? "X" : "O";
+  checkResult();
 }
 
-//filling boxes on click
-//box 1
-document.getElementById("one").addEventListener("click", function () {
-  var boxContent = document.getElementById("one").textContent;
-  if (boxContent === "-") {
-    if (turn) document.getElementById("one").textContent = "X";
-    else document.getElementById("one").textContent = "O";
-    document.getElementById("one").style.color = "black";
-    // checkResult(turn);
-    turn = !turn;
-    changePlayer(turn);
-  }
-});
-//box 2
-document.getElementById("two").addEventListener("click", function () {
-  var boxContent = document.getElementById("two").textContent;
-  if (boxContent === "-") {
-    if (turn) document.getElementById("two").textContent = "X";
-    else document.getElementById("two").textContent = "O";
-    document.getElementById("two").style.color = "black";
-    // checkResult(turn);
-    turn = !turn;
-    changePlayer(turn);
-  }
-});
-//box 3
-document.getElementById("three").addEventListener("click", function () {
-  var boxContent = document.getElementById("three").textContent;
-  if (boxContent === "-") {
-    if (turn) document.getElementById("three").textContent = "X";
-    else document.getElementById("three").textContent = "O";
-    document.getElementById("three").style.color = "black";
-    // checkResult(turn);
-    turn = !turn;
-    changePlayer(turn);
-  }
-});
-//box 4
-document.getElementById("four").addEventListener("click", function () {
-  var boxContent = document.getElementById("four").textContent;
-  if (boxContent === "-") {
-    if (turn) document.getElementById("four").textContent = "X";
-    else document.getElementById("four").textContent = "O";
-    document.getElementById("four").style.color = "black";
-    // checkResult(turn);
-    turn = !turn;
-    changePlayer(turn);
-  }
-});
-//box 5
-document.getElementById("five").addEventListener("click", function () {
-  var boxContent = document.getElementById("five").textContent;
-  if (boxContent === "-") {
-    if (turn) document.getElementById("five").textContent = "X";
-    else document.getElementById("five").textContent = "O";
-    document.getElementById("five").style.color = "black";
-    // checkResult(turn);
-    turn = !turn;
-    changePlayer(turn);
-  }
-});
-//box 6
-document.getElementById("six").addEventListener("click", function () {
-  var boxContent = document.getElementById("six").textContent;
-  if (boxContent === "-") {
-    if (turn) document.getElementById("six").textContent = "X";
-    else document.getElementById("six").textContent = "O";
-    document.getElementById("six").style.color = "black";
-    // checkResult(turn);
-    turn = !turn;
-    changePlayer(turn);
-  }
-});
-//box 7
-document.getElementById("seven").addEventListener("click", function () {
-  var boxContent = document.getElementById("seven").textContent;
-  if (boxContent === "-") {
-    if (turn) document.getElementById("seven").textContent = "X";
-    else document.getElementById("seven").textContent = "O";
-    document.getElementById("seven").style.color = "black";
-    // checkResult(turn);
-    turn = !turn;
-    changePlayer(turn);
-  }
-});
-//box 8
-document.getElementById("eight").addEventListener("click", function () {
-  var boxContent = document.getElementById("eight").textContent;
-  if (boxContent === "-") {
-    if (turn) document.getElementById("eight").textContent = "X";
-    else document.getElementById("eight").textContent = "O";
-    document.getElementById("eight").style.color = "black";
-    // checkResult(turn);
-    turn = !turn;
-    changePlayer(turn);
-  }
-});
-//box 9
-document.getElementById("nine").addEventListener("click", function () {
-  var boxContent = document.getElementById("nine").textContent;
-  if (boxContent === "-") {
-    if (turn) document.getElementById("nine").textContent = "X";
-    else document.getElementById("nine").textContent = "O";
-    document.getElementById("nine").style.color = "black";
-    // checkResult(turn);
-    turn = !turn;
-    changePlayer(turn);
-  }
+// marking signs on the board according to the current player
+var boxes = document.querySelectorAll("td");
+boxes.forEach(function (box) {
+  box.addEventListener("click", function () {
+    if (box.textContent === "-") {
+      timesClicked++;
+      box.textContent = turn ? "X" : "O";
+      turn = !turn;
+      // check winning combinations
+      changePlayer();
+    }
+  });
 });
 
-// Result logic
-function checkResult(turn) {
-  var a = document.getElementById("one").textContent;
-  var b = document.getElementById("two").textContent;
-  var c = document.getElementById("three").textContent;
-  var d = document.getElementById("four").textContent;
-  var e = document.getElementById("five").textContent;
-  var f = document.getElementById("six").textContent;
-  var g = document.getElementById("seven").textContent;
-  var h = document.getElementById("eight").textContent;
-  var i = document.getElementById("nine").textContent;
+// Result check
 
-  //winning combo check
-
-  if (
-    (a == b && b == c && a !== "-") ||
-    (d == e && e == f && e !== "-") ||
-    (g == h && h == i && i !== "-") ||
-    (a == d && d == g && a !== "-") ||
-    (b == e && e == h && e !== "-") ||
-    (c == f && f == i && i !== "-") ||
-    (a == e && e == i && i !== "-") ||
-    (c == e && c == g && e !== "-")
-  ) {
-    document.getElementById("result").textContent = turn
-      ? "player X won the game"
-      : "player O won the game";
-    document.getElementById("restart").removeAttribute("disabled");
-    document.getElementById("continueGame").removeAttribute("disabled");
+function checkResult() {
+  var winCombinations = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6],
+  ];
+  for (var i = 0; i < winCombinations.length; i++) {
+    if (
+      boxes[winCombinations[i][0]].textContent ===
+        boxes[winCombinations[i][1]].textContent &&
+      boxes[winCombinations[i][1]].textContent ===
+        boxes[winCombinations[i][2]].textContent &&
+      boxes[winCombinations[i][1]].textContent != "-"
+    ) {
+      win = 1;
+      console.log("game won");
+    }
   }
 
-  // Game draw
-  if (
-    a !== "-" &&
-    b !== "-" &&
-    c !== "-" &&
-    d !== "-" &&
-    e !== "-" &&
-    f !== "-" &&
-    g !== "-" &&
-    h !== "-" &&
-    i !== "-"
-  ) {
-    document.getElementById("result").textContent = "Game draw";
-    document.getElementById("restart").removeAttribute("disabled");
-    document.getElementById("continueGame").removeAttribute("disabled");
+  //draw check--
+  if (timesClicked === 9 || win === 1) {
+    // increase win count-
+    // draw condition
+    if (!win) {
+      document.getElementById("winX").textContent++;
+      document.getElementById("winO").textContent++;
+    }
+    // win condition
+    if (win) {
+      if (!turn) document.getElementById("winX").textContent++;
+      else document.getElementById("winO").textContent++;
+    }
+
+    // enable buttons
+    document.querySelectorAll("button").forEach(function (button) {
+      button.disabled = false;
+    });
+
+    // diable clicking on the board on winning
+    document.getElementById("ability").style.pointerEvents = "none";
+    // enable both buttons
+
+    // remove current player status
+    document.getElementById("currentPlayer").textContent = "-";
   }
 }
 
-// Restart button functionality
-document.getElementById("restart").addEventListener("click", function () {
+// Fresh start button functionality
+document.getElementById("freshGame").addEventListener("click", function () {
   location.reload();
 });
 
-// continue game functionality
+// Carry on button functionality
 document.getElementById("continueGame").addEventListener("click", function () {
-  document.getElementById("one").textContent = "-";
-  document.getElementById("two").textContent = "-";
-  document.getElementById("three").textContent = "-";
-  document.getElementById("four").textContent = "-";
-  document.getElementById("five").textContent = "-";
-  document.getElementById("six").textContent = "-";
-  document.getElementById("seven").textContent = "-";
-  document.getElementById("eight").textContent = "-";
-  document.getElementById("nine").textContent = "-";
+  boxes.forEach(function (box) {
+    box.textContent = "-";
+  });
+  // set winTrack bool = 0 and turn = 1
+  turn = 1;
+  win = 0;
+  // set clicked = 0
+  timesClicked = 0;
+  // disable both the buttons
+  document.querySelectorAll("button").forEach(function (button) {
+    button.disabled = true;
+  });
+  // enable clicking on the board and
+  document.getElementById("ability").style.pointerEvents = "auto";
 
-  document.getElementById("one").style.color = "white";
-  document.getElementById("two").style.color = "white";
-  document.getElementById("three").style.color = "white";
-  document.getElementById("four").style.color = "white";
-  document.getElementById("five").style.color = "white";
-  document.getElementById("six").style.color = "white";
-  document.getElementById("seven").style.color = "white";
-  document.getElementById("eight").style.color = "white";
-  document.getElementById("nine").style.color = "white";
+  // set current player back to X
+  document.getElementById("currentPlayer").textContent = "X";
 });

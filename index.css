@@ -12,13 +12,9 @@ h1 {
 }
 .table td {
   padding: 2.5rem;
-  color: white;
+  /* color: white; */
+  text-align: center;
 }
-.table-bordered td {
-  border: 2px solid rgb(219, 33, 20);
-}
-
-#player {
-  margin-left: 20px;
-  color: crimson;
+.table th {
+  text-align: center;
 }
